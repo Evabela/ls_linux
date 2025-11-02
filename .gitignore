@@ -1,0 +1,6 @@
+a.out
+my_ls
+*.o
+*~
+#*#
+ls_tests.c
