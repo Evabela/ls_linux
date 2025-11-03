@@ -11,7 +11,22 @@
 void my_putchar(char c);
 void my_puterror(char *str);
 void my_putstr(char *str);
+int my_strlen(char const *str);
 
-int count_flags(char *av);
+int count_flags(char **av);
+
+void flag_a(int *tab);
+void flag_d(int *tab);
+void flag_l(int *tab);
+void flag_ru(int *tab);
+void flag_t(int *tab);
+
+typedef struct letter_s
+{
+    char letter;
+    int (*ptr)(int *);
+    struct letter_s *next;
+} letter_t;
+
 
 #endif /* MY_ */
