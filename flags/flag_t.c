@@ -7,7 +7,7 @@
 
 #include "../include/my.h"
 
-void flag_ru(int *tab)
+void flag_t(int *tab)
 {
     
 }
