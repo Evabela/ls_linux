@@ -12,8 +12,10 @@ void my_putchar(char c);
 void my_puterror(char *str);
 void my_putstr(char *str);
 int my_strlen(char const *str);
+int my_strcmp(char const *s1, char const *s2);
 
 int count_flags(char **av);
+int count_files(char *pathname);
 
 void flag_a(int *tab);
 void flag_d(int *tab);
