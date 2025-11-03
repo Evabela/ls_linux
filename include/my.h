@@ -21,12 +21,4 @@ void flag_l(int *tab);
 void flag_ru(int *tab);
 void flag_t(int *tab);
 
-typedef struct letter_s
-{
-    char letter;
-    int (*ptr)(int *);
-    struct letter_s *next;
-} letter_t;
-
-
 #endif /* MY_ */
