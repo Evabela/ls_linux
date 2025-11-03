@@ -6,6 +6,7 @@
 ##
 
 SRC = 	count_flags.c \
+	display_ls.c \
 	main.c
 
 OBJ =	$(SRC:.c=.o)
@@ -16,7 +17,7 @@ all:	$(NAME)
 
 $(NAME):	$(OBJ)
 	cd lib && $(MAKE)
-	epiclang -o $(NAME) $(OBJ)
+	epiclang -o $(NAME) $(OBJ) -Llib -lmy
 
 clean:
 	rm -f $(OBJ)
