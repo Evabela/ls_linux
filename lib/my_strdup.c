@@ -8,9 +8,8 @@
 #include "../include/my.h"
 #include <stdlib.h>
 
-char *my_strdup(char *str)
+char *my_strdup(char *strd, char *str)
 {
-    char *strd;
     int len_str = my_strlen(str);
 
     strd = malloc(sizeof(char) * len_str + 1);
