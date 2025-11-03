@@ -13,6 +13,7 @@ void my_puterror(char *str);
 void my_putstr(char *str);
 int my_strlen(char const *str);
 int my_strcmp(char const *s1, char const *s2);
+char *my_strdup(char *strd, char *str);
 
 int count_flags(char **av);
 int count_files(char *pathname);
