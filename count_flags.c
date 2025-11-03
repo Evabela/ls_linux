@@ -33,7 +33,6 @@ static int verif_flag(char letter, int *tab)
 
 int count_flags(char **av)
 {
-    letter_t *list;
     int i = 1;
     int j = 0;
     int tab[5] = {0};

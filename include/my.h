@@ -17,6 +17,7 @@ char *my_strdup(char *strd, char *str);
 
 int count_flags(char **av);
 int count_files(char *pathname);
+void **sort_array(char **list_files_ns, int nb_files);
 
 void flag_a(int *tab);
 void flag_d(int *tab);
