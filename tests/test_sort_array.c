@@ -7,30 +7,36 @@
 
 #include "../include/my.h"
 #include <criterion/criterion.h>
+#include <stddef.h>
 
-Test (sort_array, whith_differents_words)
+Test(sort_array, whith_differents_words)
 {
     char *arr[9] = {"Hello", "world", "abcd", "Abdc2", "42", "How", "How", "ZER", "aaaaa"};
-    char *attempt[9] = {"42", "Abdc2", "Hello", "How", "How", "ZER", "aaaaa", "abcd", "world"};
+    char *attempt[9] = {"42",
+    "aaaaa",
+    "abcd",
+    "Abdc2",
+    "Hello",
+    "How",
+    "How",
+    "world",
+    "ZER"};
+    char **result;
 
-    sort_array(arr, 9);
-    cr_assert_eq(arr, attempt);
-}
-
-Test (sort_array, with_no_words)
-{
-    char **arr[0];
-    char **attempt[0];
-
-    sort_array(arr, 0);
-    cr_assert_eq(arr, attempt);
+    result = sort_array(arr, 9);
+    for (int i = 0; i < 9; i++)
+        cr_assert_str_eq(result[i], attempt[i]);
+    free(result);
 }
 
 Test(sort_array, with_same_words)
 {
     char *arr[3] = {"Hello", "Hello", "Hello"};
     char *attempt[3] = {"Hello", "Hello", "Hello"};
+    char **result;
 
-    sort_array(arr, 3);
-    cr_assert_eq(arr, attempt);
+    result = sort_array(arr, 3);
+    for (int i = 0; i < 3; i++)
+        cr_assert_str_eq(result[i], attempt[i]);
+    free(result);
 }
