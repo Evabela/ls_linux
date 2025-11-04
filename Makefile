@@ -24,12 +24,12 @@ $(NAME):	$(OBJ)
 
 tests_run:
 	cd lib && $(MAKE)
-	epiclang -o unit_tests $(TESTS_SRC) -Llib -lmy --coverage -lcriterion -lgcov tests/*.c
+	epiclang -o unit_tests $(TESTS_SRC) tests/*.c -Llib -lmy --coverage -lcriterion -lgcov
 	./unit_tests
 
 gcovrex:	tests_run
 	gcovr --gcov-executable "llvm-cov-20 gcov"
-	gcovr --banches --gcov-executable "llvm-cov-20 gcov"
+	gcovr --branches --gcov-executable "llvm-cov-20 gcov"
 
 clean:
 	rm -f $(OBJ)
