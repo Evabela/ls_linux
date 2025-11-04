@@ -7,7 +7,7 @@
 
 #include "../include/my.h"
 
-void flag_d(int *tab)
+void flag_d(char *pathname, int *tab)
 {
-    
+    my_putstr(pathname);
 }
