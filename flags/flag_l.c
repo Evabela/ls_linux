@@ -7,7 +7,7 @@
 
 #include "../include/my.h"
 
-void flag_l(int *tab)
+void flag_l(char *pathname, int *tab)
 {
     
 }

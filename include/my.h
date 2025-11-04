@@ -18,14 +18,15 @@ char *my_strdup(char *strd, char *str);
 char *my_strlowcase(char *str);
 char *my_strcpy(char *dest, char const *src);
 
-int count_flags(char **av);
+int count_flags(int ac, char **av);
 int count_files(char *pathname);
 char **sort_array(char **list_files_ns, int nb_files);
 
-void flag_a(int *tab);
-void flag_d(int *tab);
-void flag_l(int *tab);
-void flag_ru(int *tab);
-void flag_t(int *tab);
+int display_ls(char *pathname, int *tab);
+void flag_a(char *pathname, int *tab);
+void flag_d(char *pathname, int *tab);
+void flag_l(char *pathname, int *tab);
+void flag_ru(char *pathname, int *tab);
+void flag_t(char *pathname, int *tab);
 
 #endif /* MY_ */
