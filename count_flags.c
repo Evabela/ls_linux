@@ -23,8 +23,7 @@ static int verif_flag(char letter, int *tab)
     if (letter == 'R'){
         tab[3] = 1;
         return 0;
-    }
-    if (letter == 't'){
+    } else if (letter == 't'){
         tab[4] = 1;
         return 0;
     }
