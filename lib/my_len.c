@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2025
 ** my_len
 ** File description:
-** All functions to have the len of something (int, long or str if one is necessary)
+** All functions to have the len of something
 */
 
 #include "../include/my.h"
