@@ -9,5 +9,4 @@
 
 void flag_t(char *pathname, int *tab)
 {
-    
 }

@@ -63,8 +63,6 @@ int count_flags(int ac, char **av)
     int tab[5] = {0};
     int a = 0;
 
-    if (ac == 1)
-        i = 0;
     while (i < ac && i != 0 && av[i][0] == '-'){
         if (verif_flag(av[i][j], tab) == -1){
             return 84;
@@ -75,8 +73,8 @@ int count_flags(int ac, char **av)
             j = 0;
         }
     }
-    if (i == 0)
-        a = redirect_of_flags(i, av, tab);
+    if (ac == 1)
+        a = redirect_of_flags(0, av, tab);
     else
         a = redirect_of_flags(ac - i, av, tab);
     return a;

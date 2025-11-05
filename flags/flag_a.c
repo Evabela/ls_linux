@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2025
 ** flag_a
 ** File description:
-** 
+** List all files
 */
 
 #include "../include/my.h"

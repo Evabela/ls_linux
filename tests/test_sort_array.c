@@ -11,16 +11,17 @@
 
 Test(sort_array, whith_differents_words)
 {
-    char *arr[9] = {"Hello", "world", "abcd", "Abdc2", "42", "How", "How", "ZER", "aaaaa"};
+    char *arr[9] = {"Hello", "world", "abcd",
+        "Abdc2", "42", "How", "How", "ZER", "aaaaa"};
     char *attempt[9] = {"42",
-    "aaaaa",
-    "abcd",
-    "Abdc2",
-    "Hello",
-    "How",
-    "How",
-    "world",
-    "ZER"};
+        "aaaaa",
+        "abcd",
+        "Abdc2",
+        "Hello",
+        "How",
+        "How",
+        "world",
+        "ZER"};
     char **result;
 
     result = sort_array(arr, 9);

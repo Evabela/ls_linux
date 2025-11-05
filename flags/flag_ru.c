@@ -9,5 +9,4 @@
 
 void flag_ru(char *pathname, int *tab)
 {
-    
 }

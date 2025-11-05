@@ -109,7 +109,7 @@ void normal_ls(char *pathname, int *tab)
 int display_ls(char *pathname, int *tab, struct stat *s)
 {
     if (S_ISDIR((*s).st_mode)){
-        if(tab[1] == 1){
+        if (tab[1] == 1){
             flag_d(pathname, tab);
             return 0;
         }
