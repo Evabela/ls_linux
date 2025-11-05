@@ -87,19 +87,32 @@ int count_files(char *pathname)
     return nb_files;
 }
 
-int display_ls(char *pathname, int *tab, struct stat *s)
+void normal_ls(char *pathname, int *tab)
 {
     int nb_files = 0;
     char **list_files;
 
+    nb_files = count_files(pathname);
+    list_files = sort_array(get_files(pathname, nb_files), nb_files);
+    for (int i = 0; i < nb_files; i++){
+        my_putstr(list_files[i]);
+        my_putchar('\n');
+    }
+    free(list_files);
+}
+
+int display_ls(char *pathname, int *tab, struct stat *s)
+{
     if (S_ISDIR((*s).st_mode)){
-        nb_files = count_files(pathname);
-        list_files = sort_array(get_files(pathname, nb_files), nb_files);
-        for (int i = 0; i < nb_files; i++){
-            my_putstr(list_files[i]);
-            my_putchar('\n');
+        if(tab[1] == 1){
+            flag_d(pathname, tab);
+            return 0;
         }
-        free(list_files);
+        if (tab[0] == 1){
+            flag_a(pathname, tab);
+            return 0;
+        }
+        normal_ls(pathname, tab);
     } else {
         my_putstr(pathname);
         my_putchar('\n');
