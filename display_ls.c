@@ -112,7 +112,8 @@ void normal_ls(char *pathname, int *tab)
             my_putchar('\n');
         }
         if (tab[2] == 1){
-            full_pathname = fill_full_pathname(full_pathname, pathname, list_files[i]);
+            full_pathname = fill_full_pathname(full_pathname,
+                pathname, list_files[i]);
             flag_l(full_pathname, tab);
             free(full_pathname);
         }
@@ -134,7 +135,9 @@ int display_ls(char *pathname, int *tab, struct stat *s)
             flag_d(pathname, tab);
         if (tab[0] == 1 && tab[1] == 0)
             flag_a(pathname, tab);
-        if (tab[1] + tab[0] == 0){
+        if (tab[2] == 1)
+            flag_l(pathname, tab);
+        if (tab[1] + tab[0] + tab[2] == 0){
             my_putstr(pathname);
             my_putchar('\n');
         }
