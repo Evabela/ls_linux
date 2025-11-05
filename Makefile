@@ -8,10 +8,20 @@
 SRC = 	count_flags.c \
 	display_ls.c \
 	errors.c \
+	flags/flag_a.c \
+	flags/flag_d.c \
+	flags/flag_l.c \
+	flags/flag_ru.c \
+	flags/flag_t.c \
 	main.c
 
 TESTS_SRC =	count_flags.c \
 	errors.c \
+	flags/flag_a.c \
+	flags/flag_d.c \
+	flags/flag_l.c \
+	flags/flag_ru.c \
+	flags/flag_t.c \
 	display_ls.c
 
 OBJ =	$(SRC:.c=.o)
