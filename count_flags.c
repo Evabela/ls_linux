@@ -39,8 +39,10 @@ int redirect_of_flags(int nb_ac, char **av, int *tab)
         return a;
     }
     for (int k = 1; k <= nb_ac; k++){
-        my_putstr(av[k]);
-        my_putstr(":\n");
+        if (nb_ac > 1){
+            my_putstr(av[k]);
+            my_putstr(":\n");
+        }
         a = display_ls(av[k], tab);
         my_putstr("\n");
         if (a == 84)
