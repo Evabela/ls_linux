@@ -14,6 +14,7 @@ void my_putchar(char c);
 void my_puterror(char *str);
 void my_putstr(char *str);
 int my_put_nbr(int nb);
+int my_put_long(long nb);
 int my_strlen(char const *str);
 int my_strcmp(char const *s1, char const *s2);
 char *my_strdup(char *strd, char *str);
@@ -23,6 +24,7 @@ char *my_strcpy(char *dest, char const *src);
 int count_flags(int ac, char **av);
 int count_files(char *pathname);
 char **sort_array(char **list_files_ns, int nb_files);
+int read_for_errors(int ac, char **av);
 
 int display_ls(char *pathname, int *tab, struct stat *s);
 void flag_a(char *pathname, int *tab);
