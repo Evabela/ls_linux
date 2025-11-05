@@ -47,6 +47,20 @@ char **sort_array(char **list_files_ns, int nb_files)
     return sorted;
 }
 
+void display_ls_file(char *pathname, int *tab, struct stat *s)
+{
+    if (tab[1] == 1)
+        flag_d(pathname, tab);
+    if (tab[0] == 1 && tab[1] == 0)
+        flag_a(pathname, tab);
+    if (tab[2] == 1)
+        flag_l(pathname, tab);
+    if (tab[1] + tab[0] + tab[2] == 0){
+        my_putstr(pathname);
+        my_putchar('\n');
+    }
+}
+
 int display_ls(char *pathname, int *tab, struct stat *s)
 {
     if (S_ISDIR((*s).st_mode)){
@@ -57,16 +71,7 @@ int display_ls(char *pathname, int *tab, struct stat *s)
         if (tab[1] + tab[0] == 0)
             normal_ls(pathname, tab);
     } else {
-        if (tab[1] == 1)
-            flag_d(pathname, tab);
-        if (tab[0] == 1 && tab[1] == 0)
-            flag_a(pathname, tab);
-        if (tab[2] == 1)
-            flag_l(pathname, tab);
-        if (tab[1] + tab[0] + tab[2] == 0){
-            my_putstr(pathname);
-            my_putchar('\n');
-        }
+        display_ls_file(pathname, tab, s);
     }
     return 0;
 }
