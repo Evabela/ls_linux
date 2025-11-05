@@ -76,7 +76,7 @@ static void print_type(struct stat *s)
         my_putchar('s');
 }
 
-static print_user_and_group(struct stat *s)
+static void print_user_and_group(struct stat *s)
 {
     struct passwd *usr = getpwuid((*s).st_uid);
     struct group *grp = getgrgid((*s).st_gid);
