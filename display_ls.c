@@ -59,7 +59,8 @@ char **get_files(char *pathname, int nb_files)
     read_file = readdir(list_files);
     while (read_file != 0){
         if (read_file->d_name[0] != '.'){
-            list_files_ns[i] = malloc(sizeof(char) * my_strlen(read_file->d_name));
+            list_files_ns[i] = malloc(sizeof(char) *
+                my_strlen(read_file->d_name));
             my_strcpy(list_files_ns[i], read_file->d_name);
             i++;
         }
@@ -83,7 +84,7 @@ int count_files(char *pathname)
         read_file = readdir(list_files);
     }
     closedir(list_files);
-    return nb_files ;
+    return nb_files;
 }
 
 int display_ls(char *pathname, int *tab, struct stat *s)

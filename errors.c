@@ -27,7 +27,7 @@ int read_for_errors(int ac, char **av)
 
     for (int i = 1; i < ac; i++){
         lstat(av[i], &s);
-        if(error_not_exist(av[i], &s)){
+        if (error_not_exist(av[i], &s)){
             my_puterror("my_ls: cannot access '");
             my_putstr(av[i]);
             my_putstr("' : No such file or directory\n");
