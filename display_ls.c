@@ -109,18 +109,21 @@ void normal_ls(char *pathname, int *tab)
 int display_ls(char *pathname, int *tab, struct stat *s)
 {
     if (S_ISDIR((*s).st_mode)){
-        if (tab[1] == 1){
+        if (tab[1] == 1)
             flag_d(pathname, tab);
-            return 0;
-        }
-        if (tab[0] == 1){
+        if (tab[0] == 1 && tab[1] == 0)
             flag_a(pathname, tab);
-            return 0;
-        }
-        normal_ls(pathname, tab);
+        if (tab[1] + tab[0] == 0)
+            normal_ls(pathname, tab);
     } else {
-        my_putstr(pathname);
-        my_putchar('\n');
+        if (tab[1] == 1)
+            flag_d(pathname, tab);
+        if (tab[0] == 1 && tab[1] == 0)
+            flag_a(pathname, tab);
+        if (tab[1] + tab[0] == 0){
+            my_putstr(pathname);
+            my_putchar('\n');
+        }
     }
     return 0;
 }

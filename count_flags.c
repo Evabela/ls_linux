@@ -33,19 +33,18 @@ static int verif_flag(char letter, int *tab)
         return -1;
 }
 
-int redirect_of_flags(int nb_ac, char **av, int *tab)
+int redirect_of_flags(int ac, int i, char **av, int *tab)
 {
     int a = 0;
     struct stat s;
 
-    if (nb_ac <= 0){
+    if (ac - i <= 0){
         lstat(".", &s);
-        a = display_ls(".", tab, &s);
-        return a;
+        return display_ls(".", tab, &s);
     }
-    for (int k = 1; k <= nb_ac; k++){
+    for (int k = i; k < ac; k++){
         lstat(av[k], &s);
-        if (nb_ac > 1 && S_ISDIR(s.st_mode)){
+        if (ac - i > 1 && S_ISDIR(s.st_mode)){
             my_putstr(av[k]);
             my_putstr(":\n");
         }
@@ -59,23 +58,18 @@ int redirect_of_flags(int nb_ac, char **av, int *tab)
 int count_flags(int ac, char **av)
 {
     int i = 1;
-    int j = 1;
+    int j = 0;
     int tab[5] = {0};
-    int a = 0;
 
-    while (i < ac && i != 0 && av[i][0] == '-'){
+    while (i < ac && av[i][0] == '-'){
+        j++;
         if (verif_flag(av[i][j], tab) == -1){
             return 84;
         }
-        j++;
-        if (av[i][j] == 0){
+        if (av[i][j + 1] == 0){
             i++;
             j = 0;
         }
     }
-    if (ac == 1)
-        a = redirect_of_flags(0, av, tab);
-    else
-        a = redirect_of_flags(ac - i, av, tab);
-    return a;
+    return redirect_of_flags(ac, i, av, tab);
 }
