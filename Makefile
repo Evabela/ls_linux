@@ -13,6 +13,7 @@ SRC = 	count_flags.c \
 	flags/flag_l.c \
 	flags/flag_ru.c \
 	flags/flag_t.c \
+	normal_ls.c \
 	main.c
 
 TESTS_SRC =	count_flags.c \
@@ -22,6 +23,7 @@ TESTS_SRC =	count_flags.c \
 	flags/flag_l.c \
 	flags/flag_ru.c \
 	flags/flag_t.c \
+	normal_ls.c \
 	display_ls.c
 
 OBJ =	$(SRC:.c=.o)

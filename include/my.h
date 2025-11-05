@@ -29,6 +29,7 @@ char **sort_array(char **list_files_ns, int nb_files);
 int read_for_errors(int ac, char **av);
 
 int display_ls(char *pathname, int *tab, struct stat *s);
+void normal_ls(char *pathname, int *tab);
 void flag_a(char *pathname, int *tab);
 void flag_d(char *pathname, int *tab);
 void flag_l(char *pathname, int *tab);
