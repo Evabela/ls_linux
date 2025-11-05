@@ -139,13 +139,3 @@ void flag_l(char *pathname, int *tab)
     print_name(pathname);
     my_putchar('\n');
 }
-
-int main(int ac, char **av)
-{
-    int tab[5] = {0, 0, 0, 0, 0};
-
-    for (int i = 1; i < ac; i++){
-        flag_l(av[i], tab);
-    }
-    return 0;
-}
