@@ -18,19 +18,19 @@ static int verif_flag(char letter, int *tab)
     if (letter == 'd'){
         tab[1] = 1;
         return 0;
-    }
-    if (letter == 'l'){
+    } else if (letter == 'l'){
         tab[2] = 1;
         return 0;
     }
     if (letter == 'R'){
         tab[3] = 1;
         return 0;
-    } else if (letter == 't'){
+    }
+    if (letter == 't'){
         tab[4] = 1;
         return 0;
-    }
-    return -1;
+    } else
+        return -1;
 }
 
 int redirect_of_flags(int nb_ac, char **av, int *tab)
@@ -59,18 +59,23 @@ int redirect_of_flags(int nb_ac, char **av, int *tab)
 int count_flags(int ac, char **av)
 {
     int i = 1;
-    int j = 0;
+    int j = 1;
     int tab[5] = {0};
     int a = 0;
 
     if (ac == 1)
         i = 0;
-    while (av[i][0] == '-' && i < ac){
-        j++;
-        if (av[i][j] == 0 && av[i][j - 1] != '-')
-            i++;
-        if (verif_flag(av[i][j], tab) == -1)
+    while (i < ac && i != 0 && av[i][0] == '-'){
+        if (verif_flag(av[i][j], tab) == -1){
+            my_putstr("\n not a correct letter : ");
+            my_putchar(av[i][j]);
             return 84;
+        }
+        j++;
+        if (av[i][j] == 0){
+            i++;
+            j = 0;
+        }
     }
     if (i == 0)
         a = redirect_of_flags(i, av, tab);

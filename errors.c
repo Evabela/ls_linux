@@ -11,6 +11,8 @@
 
 static int error_not_exist(char *pathname, struct stat *s)
 {
+    if (pathname[0] == '-')
+        return 0;
     if (S_ISDIR((*s).st_mode)){
         if (opendir(pathname) != 0)
             return 0;
