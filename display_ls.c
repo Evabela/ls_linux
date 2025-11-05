@@ -8,20 +8,9 @@
 #include "include/my.h"
 #include <dirent.h>
 #include <stdlib.h>
-
-static void print_2d_arr(char **str, int size)
-{
-    for (int i = 0; i < size; i++){
-        if (str[i] == 0){
-            my_put_nbr(0);
-            my_putstr(" / ");
-        } else {
-            my_putstr(str[i]);
-            my_putstr(" / ");
-        }
-    }
-    my_putchar('\n');
-}
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <sys/sysmacros.h>
 
 static int find_smallest(char **list, int nb_files)
 {
@@ -99,13 +88,21 @@ int count_files(char *pathname)
 
 int display_ls(char *pathname, int *tab)
 {
-    int nb_files = count_files(pathname);
-    char **list_files = sort_array(get_files(pathname, nb_files), nb_files);
+    int nb_files = 0;
+    char **list_files;
+    struct stat s;
 
-    for (int i = 0; i < nb_files; i++){
-        my_putstr(list_files[i]);
-        my_putchar('\n');
+    lstat(pathname, &s);
+    if (S_ISDIR(s.st_mode)){
+        nb_files = count_files(pathname);
+        list_files = sort_array(get_files(pathname, nb_files), nb_files);
+        for (int i = 0; i < nb_files; i++){
+            my_putstr(list_files[i]);
+            my_putchar('\n');
+        }
+        free(list_files);
+    } else {
+        my_putstr(pathname);
     }
-    free(list_files);
     return 0;
 }
