@@ -67,8 +67,6 @@ int count_flags(int ac, char **av)
         i = 0;
     while (i < ac && i != 0 && av[i][0] == '-'){
         if (verif_flag(av[i][j], tab) == -1){
-            my_putstr("\n not a correct letter : ");
-            my_putchar(av[i][j]);
             return 84;
         }
         j++;

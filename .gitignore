@@ -4,3 +4,5 @@ my_ls
 *~
 #*#
 ls_tests.c
+libmy.a
+details_file.c
