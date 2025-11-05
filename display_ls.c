@@ -8,7 +8,6 @@
 #include "include/my.h"
 #include <dirent.h>
 #include <stdlib.h>
-#include <sys/stat.h>
 #include <fcntl.h>
 #include <sys/sysmacros.h>
 
@@ -44,6 +43,7 @@ char **sort_array(char **list_files_ns, int nb_files)
             list_files_ns[k] = 0;
         }
     }
+    free(list_files_ns);
     return sorted;
 }
 
