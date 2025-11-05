@@ -87,10 +87,22 @@ int count_files(char *pathname)
     return nb_files;
 }
 
+static char *fill_full_pathname(char *full_pathname, char *pathname, char *file)
+{
+    full_pathname = malloc(sizeof(char) *
+        (my_strlen(pathname) + my_strlen(file) + 2));
+    full_pathname[0] = 0;
+    my_strcat(full_pathname, pathname);
+    my_strcat(full_pathname, "/");
+    my_strcat(full_pathname, file);
+    return full_pathname;
+}
+
 void normal_ls(char *pathname, int *tab)
 {
     int nb_files = 0;
     char **list_files;
+    char *full_pathname;
 
     nb_files = count_files(pathname);
     list_files = sort_array(get_files(pathname, nb_files), nb_files);
@@ -100,7 +112,9 @@ void normal_ls(char *pathname, int *tab)
             my_putchar('\n');
         }
         if (tab[2] == 1){
-            flag_l(list_files[i], tab);
+            full_pathname = fill_full_pathname(full_pathname, pathname, list_files[i]);
+            flag_l(full_pathname, tab);
+            free(full_pathname);
         }
     }
     free(list_files);
