@@ -86,7 +86,6 @@ static void print_user_and_group(struct stat *s)
     my_putstr(usr->pw_name);
     my_putchar(' ');
     my_putstr(grp->gr_name);
-    my_putchar(' ');
 }
 
 void print_date(struct stat *s)
@@ -97,7 +96,29 @@ void print_date(struct stat *s)
     for (int i = 4; i < 16; i++){
         my_putchar(str[i]);
     }
+}
+
+void print_name(char *path_name)
+{
+    int count = 0;
+    int i = 0;
+
+    while (path_name[count] != 0){
+        if (path_name[count] == '/')
+            i = count + 1;
+        count++;
+    }
     my_putchar(' ');
+    my_putstr(&path_name[i]);
+}
+
+void my_put_size(struct stat *s)
+{
+    int size = (*s).st_size;
+
+    for (int i = 0; i < 4 - my_intlen(size); i++)
+        my_putchar(' ');
+    my_put_nbr(size);
 }
 
 void flag_l(char *pathname, int *tab)
@@ -112,6 +133,19 @@ void flag_l(char *pathname, int *tab)
     my_putchar(' ');
     my_put_long(s.st_nlink);
     print_user_and_group(&s);
-    my_put_nbr(s.st_size);
+    my_putchar(' ');
+    my_put_size(&s);
     print_date(&s);
+    print_name(pathname);
+    my_putchar('\n');
+}
+
+int main(int ac, char **av)
+{
+    int tab[5] = {0, 0, 0, 0, 0};
+
+    for (int i = 1; i < ac; i++){
+        flag_l(av[i], tab);
+    }
+    return 0;
 }
