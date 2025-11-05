@@ -6,6 +6,9 @@
 */
 
 #include "../include/my.h"
+#include <sys/types.h>
+#include <pwd.h>
+#include <grp.h>
 
 static void perm_oth(struct stat *s)
 {
@@ -73,6 +76,18 @@ static void print_type(struct stat *s)
         my_putchar('s');
 }
 
+static print_user_and_group(struct stat *s)
+{
+    struct passwd *usr = getpwuid((*s).st_uid);
+    struct group *grp = getgrgid((*s).st_gid);
+
+    my_putchar(' ');
+    my_putstr(usr->pw_name);
+    my_putchar(' ');
+    my_putstr(grp->gr_name);
+    my_putchar(' ');
+}
+
 void flag_l(char *pathname, int *tab)
 {
     struct stat s;
@@ -82,4 +97,7 @@ void flag_l(char *pathname, int *tab)
     perm_usr(&s);
     perm_grp(&s);
     perm_oth(&s);
+    my_putchar(' ');
+    my_put_long(s.st_nlink);
+    print_user_and_group(&s);
 }
