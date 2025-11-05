@@ -9,5 +9,9 @@
 
 void flag_d(char *pathname, int *tab)
 {
-    my_putstr(pathname);
+    if (tab[2] == 0){
+        my_putstr(pathname);
+        my_putchar('\n');
+    } else
+        flag_l(pathname, tab);
 }

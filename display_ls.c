@@ -95,8 +95,13 @@ void normal_ls(char *pathname, int *tab)
     nb_files = count_files(pathname);
     list_files = sort_array(get_files(pathname, nb_files), nb_files);
     for (int i = 0; i < nb_files; i++){
-        my_putstr(list_files[i]);
-        my_putchar('\n');
+        if (tab[2] == 0){
+            my_putstr(list_files[i]);
+            my_putchar('\n');
+        }
+        if (tab[2] == 1){
+            flag_l(list_files[i], tab);
+        }
     }
     free(list_files);
 }
