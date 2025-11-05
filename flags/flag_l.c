@@ -9,18 +9,19 @@
 #include <sys/types.h>
 #include <pwd.h>
 #include <grp.h>
+#include <time.h>
 
 static void perm_oth(struct stat *s)
 {
-    if ((*s).st_mode && S_IROTH)
+    if ((*s).st_mode & S_IROTH)
         my_putchar('r');
     else
         my_putchar('-');
-    if ((*s).st_mode && S_IWOTH)
+    if ((*s).st_mode & S_IWOTH)
         my_putchar('w');
     else
         my_putchar('-');
-    if ((*s).st_mode && S_IXOTH)
+    if ((*s).st_mode & S_IXOTH)
         my_putchar('x');
     else
         my_putchar('-');
@@ -28,15 +29,15 @@ static void perm_oth(struct stat *s)
 
 static void perm_grp(struct stat *s)
 {
-    if ((*s).st_mode && S_IRGRP)
+    if ((*s).st_mode & S_IRGRP)
         my_putchar('r');
     else
         my_putchar('-');
-    if ((*s).st_mode && S_IWGRP)
+    if ((*s).st_mode & S_IWGRP)
         my_putchar('w');
     else
         my_putchar('-');
-    if ((*s).st_mode && S_IXGRP)
+    if ((*s).st_mode & S_IXGRP)
         my_putchar('x');
     else
         my_putchar('-');
@@ -44,15 +45,15 @@ static void perm_grp(struct stat *s)
 
 static void perm_usr(struct stat *s)
 {
-    if ((*s).st_mode && S_IRUSR)
+    if ((*s).st_mode & S_IRUSR)
         my_putchar('r');
     else
         my_putchar('-');
-    if ((*s).st_mode && S_IWUSR)
+    if ((*s).st_mode & S_IWUSR)
         my_putchar('w');
     else
         my_putchar('-');
-    if ((*s).st_mode && S_IXUSR)
+    if ((*s).st_mode & S_IXUSR)
         my_putchar('x');
     else
         my_putchar('-');
@@ -88,6 +89,17 @@ static void print_user_and_group(struct stat *s)
     my_putchar(' ');
 }
 
+void print_date(struct stat *s)
+{
+    char *str = ctime(&(*s).st_mtime);
+
+    my_putchar(' ');
+    for (int i = 4; i < 16; i++){
+        my_putchar(str[i]);
+    }
+    my_putchar(' ');
+}
+
 void flag_l(char *pathname, int *tab)
 {
     struct stat s;
@@ -100,4 +112,6 @@ void flag_l(char *pathname, int *tab)
     my_putchar(' ');
     my_put_long(s.st_nlink);
     print_user_and_group(&s);
+    my_put_nbr(s.st_size);
+    print_date(&s);
 }
