@@ -16,6 +16,7 @@ void my_putstr(char *str);
 int my_put_nbr(int nb);
 int my_put_long(long nb);
 int my_strlen(char const *str);
+int my_intlen(int nb);
 int my_strcmp(char const *s1, char const *s2);
 char *my_strdup(char *strd, char *str);
 char *my_strlowcase(char *str);
