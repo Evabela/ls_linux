@@ -5,6 +5,9 @@
 ** Search and repertory flags, if error, return 84
 */
 #include "include/my.h"
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <sys/sysmacros.h>
 
 static int verif_flag(char letter, int *tab)
 {
@@ -33,17 +36,20 @@ static int verif_flag(char letter, int *tab)
 int redirect_of_flags(int nb_ac, char **av, int *tab)
 {
     int a = 0;
+    struct stat s;
 
     if (nb_ac <= 0){
-        a = display_ls(".", tab);
+        lstat(".", &s);
+        a = display_ls(".", tab, &s);
         return a;
     }
     for (int k = 1; k <= nb_ac; k++){
-        if (nb_ac > 1){
+        lstat(av[k], &s);
+        if (nb_ac > 1 && S_ISDIR(s.st_mode)){
             my_putstr(av[k]);
             my_putstr(":\n");
         }
-        a = display_ls(av[k], tab);
+        a = display_ls(av[k], tab, &s);
         my_putstr("\n");
         if (a == 84)
             return 84;

@@ -5,6 +5,8 @@
 ** Header file
 */
 
+#include <sys/stat.h>
+
 #ifndef MY_
     #define MY_
 
@@ -22,7 +24,7 @@ int count_flags(int ac, char **av);
 int count_files(char *pathname);
 char **sort_array(char **list_files_ns, int nb_files);
 
-int display_ls(char *pathname, int *tab);
+int display_ls(char *pathname, int *tab, struct stat *s);
 void flag_a(char *pathname, int *tab);
 void flag_d(char *pathname, int *tab);
 void flag_l(char *pathname, int *tab);

@@ -86,14 +86,12 @@ int count_files(char *pathname)
     return nb_files ;
 }
 
-int display_ls(char *pathname, int *tab)
+int display_ls(char *pathname, int *tab, struct stat *s)
 {
     int nb_files = 0;
     char **list_files;
-    struct stat s;
 
-    lstat(pathname, &s);
-    if (S_ISDIR(s.st_mode)){
+    if (S_ISDIR((*s).st_mode)){
         nb_files = count_files(pathname);
         list_files = sort_array(get_files(pathname, nb_files), nb_files);
         for (int i = 0; i < nb_files; i++){
@@ -103,6 +101,7 @@ int display_ls(char *pathname, int *tab)
         free(list_files);
     } else {
         my_putstr(pathname);
+        my_putchar('\n');
     }
     return 0;
 }
