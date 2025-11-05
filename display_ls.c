@@ -62,16 +62,18 @@ char **get_files(char *pathname, int nb_files)
 {
     DIR *list_files;
     struct dirent *read_file;
-    char **list_files_ns = {0};
+    char **list_files_ns = 0;
     int i = 0;
 
     list_files_ns = malloc(sizeof(char *) * nb_files);
     list_files = opendir(pathname);
     read_file = readdir(list_files);
     while (read_file != 0){
-        list_files_ns[i] = malloc(sizeof(char) * my_strlen(read_file->d_name));
-        list_files_ns[i] = read_file->d_name;
-        i++;
+        if (read_file->d_name[0] != '.'){
+            list_files_ns[i] = malloc(sizeof(char) * my_strlen(read_file->d_name));
+            my_strcpy(list_files_ns[i], read_file->d_name);
+            i++;
+        }
         read_file = readdir(list_files);
     }
     closedir(list_files);
@@ -82,14 +84,28 @@ int count_files(char *pathname)
 {
     DIR *list_files;
     struct dirent *read_file;
-    int nb_files;
+    int nb_files = 0;
 
     list_files = opendir(pathname);
     read_file = readdir(list_files);
     while (read_file != 0){
-        nb_files++;
+        if (read_file->d_name[0] != '.')
+            nb_files++;
         read_file = readdir(list_files);
     }
     closedir(list_files);
-    return nb_files;
+    return nb_files ;
+}
+
+int display_ls(char *pathname, int *tab)
+{
+    int nb_files = count_files(pathname);
+    char **list_files = sort_array(get_files(pathname, nb_files), nb_files);
+
+    for (int i = 0; i < nb_files; i++){
+        my_putstr(list_files[i]);
+        my_putchar('\n');
+    }
+    free(list_files);
+    return 0;
 }
