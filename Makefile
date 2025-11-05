@@ -7,9 +7,11 @@
 
 SRC = 	count_flags.c \
 	display_ls.c \
+	errors.c \
 	main.c
 
 TESTS_SRC =	count_flags.c \
+	errors.c \
 	display_ls.c
 
 OBJ =	$(SRC:.c=.o)
