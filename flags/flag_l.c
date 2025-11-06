@@ -121,6 +121,20 @@ void my_put_size(struct stat *s)
     my_put_nbr(size);
 }
 
+void my_put_total(char **list_file, int nb_file)
+{
+    struct stat size;
+    int blocks = 0;
+
+    my_putstr("total ");
+    for (int i = 0; i < nb_file; i++){
+        lstat(list_file[i], &size);
+        blocks += size.st_blocks;
+    }
+    my_put_nbr(blocks / 2);
+    my_putchar('\n');
+}
+
 void flag_l(char *pathname, int *tab)
 {
     struct stat s;
