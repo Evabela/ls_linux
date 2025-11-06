@@ -10,6 +10,7 @@
 #include <pwd.h>
 #include <grp.h>
 #include <time.h>
+#include <stdlib.h>
 
 static void perm_oth(struct stat *s)
 {
@@ -139,7 +140,8 @@ void flag_l(char *pathname, int *tab)
 {
     struct stat s;
 
-    lstat(pathname, &s);
+    if (lstat(pathname, &s) != 0)
+        exit(84);
     print_type(&s);
     perm_usr(&s);
     perm_grp(&s);

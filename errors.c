@@ -8,6 +8,8 @@
 #include "include/my.h"
 #include <fcntl.h>
 #include <dirent.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 static int error_not_exist(char *pathname, struct stat *s)
 {
@@ -22,7 +24,8 @@ static int error_not_exist(char *pathname, struct stat *s)
     if (lstat(pathname, &t) == 0){
         return 0;
     }
-    return 84;
+    perror(pathname);
+    exit(84);
 }
 
 int read_for_errors(int ac, char **av)
@@ -31,10 +34,7 @@ int read_for_errors(int ac, char **av)
 
     for (int i = 1; i < ac; i++){
         lstat(av[i], &s);
-        if (error_not_exist(av[i], &s)){
-            my_puterror("my_ls: cannot access '");
-            my_putstr(av[i]);
-            my_putstr("' : No such file or directory\n");
+        if (error_not_exist(av[i], &s) != 0){
             return 84;
         }
     }

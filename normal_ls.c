@@ -22,7 +22,7 @@ char **get_files(char *pathname, int nb_files)
     while (read_file != 0){
         if (read_file->d_name[0] != '.'){
             list_files_ns[i] = malloc(sizeof(char) *
-                my_strlen(read_file->d_name));
+                my_strlen(read_file->d_name) + 1);
             my_strcpy(list_files_ns[i], read_file->d_name);
             i++;
         }

@@ -8,6 +8,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <sys/sysmacros.h>
+#include <stdlib.h>
 
 static int verif_flag(char letter, int *tab)
 {
@@ -39,18 +40,20 @@ int redirect_of_flags(int ac, int i, char **av, int *tab)
     struct stat s;
 
     if (ac - i <= 0){
-        lstat(".", &s);
+        if (lstat(".", &s) != 0)
+            exit(84);
         return display_ls(".", tab, &s);
     }
     for (int k = i; k < ac; k++){
-        lstat(av[k], &s);
+        if (lstat(av[k], &s) != 0)
+            exit(84);
         if (ac - i > 1 && S_ISDIR(s.st_mode)){
             my_putstr(av[k]);
             my_putstr(":\n");
         }
         a = display_ls(av[k], tab, &s);
         if (a == 84)
-            return 84;
+            exit(84);
     }
     return 0;
 }
