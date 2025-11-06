@@ -49,7 +49,7 @@ int count_files(char *pathname)
     return nb_files;
 }
 
-static char *fill_full_pathname(char *full_pathname, char *pathname, char *file)
+char *fill_full_pathname(char *full_pathname, char *pathname, char *file)
 {
     full_pathname = malloc(sizeof(char) *
         (my_strlen(pathname) + my_strlen(file) + 2));

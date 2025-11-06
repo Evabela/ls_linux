@@ -27,6 +27,7 @@ int count_flags(int ac, char **av);
 int count_files(char *pathname);
 char **sort_array(char **list_files_ns, int nb_files);
 int read_for_errors(int ac, char **av);
+char *fill_full_pathname(char *full_pathname, char *pathname, char *file);
 
 int display_ls(char *pathname, int *tab, struct stat *s);
 void normal_ls(char *pathname, int *tab);
