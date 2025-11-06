@@ -48,18 +48,23 @@ static int count_files_a(char *pathname)
 
 void flag_a(char *pathname, int *tab)
 {
-    int nb_files = 0;
+    int nb_files = count_files_a(pathname);
     char **list_files;
+    char *full_name;
 
-    nb_files = count_files_a(pathname);
-    list_files = sort_array(get_files_a(pathname, nb_files), nb_files);
+    list_files = flag_t(sort_array(get_files_a(pathname, nb_files), nb_files),
+        pathname, nb_files, tab);
+    if (tab[2] == 1)
+        my_put_total(list_files, nb_files);
     for (int i = 0; i < nb_files; i++){
         if (tab[2] == 0){
             my_putstr(list_files[i]);
             my_putchar('\n');
         }
         if (tab[2] == 1){
-            flag_l(list_files[i], tab);
+            full_name = fill_full_pathname(full_name, pathname, list_files[i]);
+            flag_l(full_name, tab);
+            free(full_name);
         }
     }
     free(list_files);
