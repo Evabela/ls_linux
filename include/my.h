@@ -28,6 +28,7 @@ int count_files(char *pathname);
 char **sort_array(char **list_files_ns, int nb_files);
 int read_for_errors(int ac, char **av);
 char *fill_full_pathname(char *full_pathname, char *pathname, char *file);
+void my_put_total(char **list_file, int nb_file);
 
 int display_ls(char *pathname, int *tab, struct stat *s);
 void normal_ls(char *pathname, int *tab);
@@ -35,6 +36,6 @@ void flag_a(char *pathname, int *tab);
 void flag_d(char *pathname, int *tab);
 void flag_l(char *pathname, int *tab);
 void flag_ru(char *pathname, int *tab);
-void flag_t(char *pathname, int *tab);
+char **flag_t(char **list_files, char *pathname, int nb_file, int *tab);
 
 #endif /* MY_ */
