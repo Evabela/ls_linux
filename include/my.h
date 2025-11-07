@@ -19,6 +19,7 @@ int my_put_long_long(long long nb);
 int my_strlen(char const *str);
 int my_intlen(int nb);
 int my_strcmp(char const *s1, char const *s2);
+int my_real_strcmp(char const *s1, char const *s2);
 char *my_strdup(char *strd, char *str);
 char *my_strlowcase(char *str);
 char *my_strcpy(char *dest, char const *src);
