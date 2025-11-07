@@ -64,6 +64,7 @@ void display_ls_file(char *pathname, int *tab, struct stat *s)
 int display_ls(char *pathname, int *tab, struct stat *s)
 {
     if (S_ISDIR((*s).st_mode)){
+        errors_in_folder(pathname);
         if (tab[1] == 1)
             flag_d(pathname, tab);
         if (tab[0] == 1 && tab[1] == 0)
