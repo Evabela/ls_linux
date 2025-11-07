@@ -13,12 +13,15 @@ static char **get_files_a(char *pathname, int nb_files)
 {
     DIR *list_files;
     struct dirent *read_file;
-    char **list_files_ns = 0;
+    char **list_files_ns = malloc(sizeof(char *) * nb_files);
     int i = 0;
 
-    list_files_ns = malloc(sizeof(char *) * nb_files);
     list_files = opendir(pathname);
+    if (list_files == 0)
+        exit(84);
     read_file = readdir(list_files);
+    if (read_file == 0)
+        exit(84);
     while (read_file != 0){
         list_files_ns[i] = malloc(sizeof(char) *
             my_strlen(read_file->d_name) + 1);
