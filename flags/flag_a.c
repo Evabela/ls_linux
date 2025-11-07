@@ -60,7 +60,7 @@ void flag_a(char *pathname, int *tab)
     if (tab[2] == 1)
         my_put_total(list_files, pathname, nb_files);
     for (int i = 0; i < nb_files; i++){
-        full_name = fill_full_pathname(full_name, pathname, list_files[i]);
+        full_name = fill_full_pathname(pathname, list_files[i]);
         if (tab[2] == 0){
             my_putstr(list_files[i]);
             my_putchar('\n');

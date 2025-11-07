@@ -18,12 +18,12 @@ int return_smallest(char **list, int nb_files, char *path)
 
     while (list[smallest] == 0)
         smallest++;
-    full_path = fill_full_pathname(full_path, path, list[smallest]);
+    full_path = fill_full_pathname(path, list[smallest]);
     lstat(full_path, &my_time);
     small_time = my_time.st_mtime;
     for (int i = 0; i < nb_files; i++){
         if (list[i] != 0)
-            lstat(fill_full_pathname(full_path, path, list[i]), &my_time);
+            lstat(fill_full_pathname(path, list[i]), &my_time);
         if (list[i] != 0 && my_time.st_mtime >= small_time){
             smallest = i;
             small_time = my_time.st_mtime;

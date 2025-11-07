@@ -130,9 +130,10 @@ void my_put_total(char **list_file, char *pathname, int nb_file)
 
     my_putstr("total ");
     for (int i = 0; i < nb_file; i++){
-        full_name = fill_full_pathname(full_name, pathname, list_file[i]);
+        full_name = fill_full_pathname(pathname, list_file[i]);
         lstat(full_name, &size);
         blocks += ((size.st_blocks) / 2);
+        free(full_name);
     }
     my_put_long_long(blocks);
     my_putchar('\n');
