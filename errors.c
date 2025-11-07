@@ -16,14 +16,11 @@ void errors_in_folder(char *pathname)
 {
     DIR *file;
     struct dirent *read_file;
-    struct stat s;
 
     errno = 0;
     file = opendir(pathname);
-    if (errno != 0){
-        perror(pathname);
+    if (errno != 0)
         exit(84);
-    }
     read_file = readdir(file);
     if (read_file == 0 && errno != 0){
         perror(pathname);
