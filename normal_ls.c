@@ -68,7 +68,7 @@ void normal_ls(char *pathname, int *tab)
     char *full_name;
 
     if (tab[2] == 1)
-        my_put_total(list_files, nb_files);
+        my_put_total(list_files, pathname, nb_files);
     for (int i = 0; i < nb_files; i++){
         full_name = fill_full_pathname(full_name, pathname, list_files[i]);
         if (tab[2] == 0){

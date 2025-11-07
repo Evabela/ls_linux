@@ -122,14 +122,16 @@ void my_put_size(struct stat *s)
     my_put_nbr(size);
 }
 
-void my_put_total(char **list_file, int nb_file)
+void my_put_total(char **list_file, char *pathname, int nb_file)
 {
     struct stat size;
     long long blocks = 0;
+    char *full_name;
 
     my_putstr("total ");
     for (int i = 0; i < nb_file; i++){
-        lstat(list_file[i], &size);
+        full_name = fill_full_pathname(full_name, pathname, list_file[i]);
+        lstat(full_name, &size);
         blocks += ((size.st_blocks) / 2);
     }
     my_put_long_long(blocks);
