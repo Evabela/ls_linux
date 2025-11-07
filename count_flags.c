@@ -47,7 +47,7 @@ int redirect_of_flags(int ac, int i, char **av, int *tab)
     for (int k = i; k < ac; k++){
         if (lstat(av[k], &s) != 0)
             exit(84);
-        if (ac - i > 1 && S_ISDIR(s.st_mode)){
+        if ((ac - i > 1 && S_ISDIR(s.st_mode) || tab[3] == 1)){
             my_putstr(av[k]);
             my_putstr(":\n");
         }
