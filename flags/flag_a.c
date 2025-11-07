@@ -21,7 +21,7 @@ static char **get_files_a(char *pathname, int nb_files)
     read_file = readdir(list_files);
     while (read_file != 0){
         list_files_ns[i] = malloc(sizeof(char) *
-            my_strlen(read_file->d_name));
+            my_strlen(read_file->d_name) + 1);
         my_strcpy(list_files_ns[i], read_file->d_name);
         i++;
         read_file = readdir(list_files);
@@ -57,15 +57,15 @@ void flag_a(char *pathname, int *tab)
     if (tab[2] == 1)
         my_put_total(list_files, nb_files);
     for (int i = 0; i < nb_files; i++){
+        full_name = fill_full_pathname(full_name, pathname, list_files[i]);
         if (tab[2] == 0){
             my_putstr(list_files[i]);
             my_putchar('\n');
         }
-        if (tab[2] == 1){
-            full_name = fill_full_pathname(full_name, pathname, list_files[i]);
+        if (tab[2] == 1)
             flag_l(full_name, tab);
-            free(full_name);
-        }
+        free(full_name);
     }
+    flag_ru(list_files, pathname, nb_files, tab);
     free(list_files);
 }
