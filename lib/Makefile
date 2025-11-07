@@ -12,6 +12,7 @@ SRC = 	my_len.c \
 	my_strlowcase.c \
 	my_strcpy.c \
 	my_strcat.c \
+	my_put_long.c \
 	my_putchar.c
 
 OBJ =	$(SRC:.c=.o)
