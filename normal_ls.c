@@ -63,23 +63,22 @@ char *fill_full_pathname(char *full_pathname, char *pathname, char *file)
 void normal_ls(char *pathname, int *tab)
 {
     int nb_files = count_files(pathname);
-    char **list_files;
+    char **list_files = flag_t(sort_array(
+            get_files(pathname, nb_files), nb_files), pathname, nb_files, tab);
     char *full_name;
 
-    list_files = flag_t(sort_array(get_files(pathname, nb_files), nb_files),
-        pathname, nb_files, tab);
     if (tab[2] == 1)
         my_put_total(list_files, nb_files);
     for (int i = 0; i < nb_files; i++){
+        full_name = fill_full_pathname(full_name, pathname, list_files[i]);
         if (tab[2] == 0){
             my_putstr(list_files[i]);
             my_putchar('\n');
         }
-        if (tab[2] == 1){
-            full_name = fill_full_pathname(full_name, pathname, list_files[i]);
+        if (tab[2] == 1)
             flag_l(full_name, tab);
-            free(full_name);
-        }
+        free(full_name);
     }
+    flag_ru(list_files, pathname, nb_files, tab);
     free(list_files);
 }
